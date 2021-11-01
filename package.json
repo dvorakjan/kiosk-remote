@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "DISPLAY=:0 node ./bin/www",
     "debug": "DEBUG=kiosk-remote:* npm start"
   },
   "dependencies": {
