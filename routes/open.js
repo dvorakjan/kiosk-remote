@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
   }
   
   console.log('Running', command)
-  chromium = spawn(command, params)
+  chromium = spawn(bin, params)
   //chromium = spawn('sleep', ['10'])
 
   chromium.stdout.on('data', (data) => {
