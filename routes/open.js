@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
   const url = req.body.url
 
   const bin = `/usr/bin/chromium-browser`
-  const params = ['--noerrdialogs', '--disable-infobars', '--kiosk', url]
+  const params = ['--noerrdialogs', '--disable-infobars', '--kiosk', '--no-sandbox', url]
   const command = bin + ' ' + params.join(' ')
 
   if (chromium) {
