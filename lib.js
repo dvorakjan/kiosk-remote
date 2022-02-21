@@ -1,12 +1,15 @@
 var { spawn } = require('child_process');
+var os = require("os");
 
 var chromium
 
 module.exports = {
   open: open,
   reset: function(callback) {
-    open('http://localhost:3000/instructions', callback)
-  }
+    const port = process.env.PORT || '3000'
+    open(getUrl() + `/instructions`, callback)
+  },
+  getUrl
 }
 
 function open(url, callback) {
@@ -52,4 +55,15 @@ function open(url, callback) {
     console.error('open error', err)
     callback(err)
   }
+}
+
+function getUrl() {
+  var hostname = os.hostname();
+  var port = process.env.PORT || '3000'
+
+  if (!hostname.endsWith('.local')) {
+    hostname = hostname + '.local'
+  }
+
+  return `http://${hostname}${port == '80' ? '' : `:${port}`}`
 }
