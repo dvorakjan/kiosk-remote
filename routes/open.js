@@ -5,8 +5,12 @@ var { open, reset } = require('../lib')
 router.post('/', function(req, res, next) {
   const url = req.body.url
   open(url, (err, params) => {
-    console.log('open callback', res.headersSent, err, params)
-    !res.headersSent && res.render(err ? 'error' : 'open', {error: err, ...params})
+    if (!res.headersSent) {
+      console.log('open callback, rendering', res.headersSent, err, params)
+      res.render(err ? 'error' : 'open', {error: err, ...params})
+    } else {
+      console.log('open callback, not rendering', res.headersSent, err, params)
+    }
   })
 });
 
