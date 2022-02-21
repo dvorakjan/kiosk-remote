@@ -23,7 +23,7 @@ function open(url, callback) {
     
     console.log('Running', command)
     chromium = spawn(bin, params)
-    //chromium = spawn('sleep', ['1'])
+    //chromium = spawn('sleep', ['10'])
 
     chromium.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`);
@@ -44,9 +44,10 @@ function open(url, callback) {
       if (!errorSent) {
         console.log('close - calling callback')
         callback(null, 'open', { command, code })
-        setTimeout(() => callback(null, 'open', { command, code: 'timeout' }), 1000)
       }
     });
+
+    setTimeout(() => callback(null, 'open', { command, code: 'timeout' }), 1000)
   } catch (err) {
     console.error('open error', err)
     callback(err)
