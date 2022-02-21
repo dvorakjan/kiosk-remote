@@ -9,7 +9,7 @@ var router = express.Router();
 router.get('/instructions', function(req, res, next) {
   
   QRCode.toDataURL(getUrl(), {width: 500, margin: 2}, function (err, qrcode) {
-    res.render('instructions', {hostname, qrcode});
+    res.render('instructions', {url: getUrl(), qrcode});
   })
 });
 
