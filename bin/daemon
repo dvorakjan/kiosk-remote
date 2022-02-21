@@ -1,3 +1,4 @@
 #!/bin/bash
 
+xhost +local:
 sudo PORT=80 DISPLAY=:0 nohup /home/pi/kiosk-remote/bin/www > /home/pi/kiosk-remote/log.txt 2>&1 &
