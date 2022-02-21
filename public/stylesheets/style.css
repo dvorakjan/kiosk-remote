@@ -49,8 +49,8 @@ input[type=text]:hover, input[type=text]:active {
 
 input[type=submit], a.button {
   height: 40px;
-  padding: 5px 25px;
-
+  padding: 7px 25px;
+  text-decoration: none;
   /* Blue */
   background: #0063F8;
   color: white;
