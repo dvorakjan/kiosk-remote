@@ -3,11 +3,12 @@ var { spawn } = require('child_process');
 var chromium
 
 module.exports = {
-  open: function open(url, res, callback) {
+  open: function open(url, callback) {
     try {
       const bin = `/usr/bin/chromium-browser`
       const params = ['--noerrdialogs', '--disable-infobars', '--kiosk', '--no-sandbox', url]
       const command = bin + ' ' + params.join(' ')
+      let errorSent = false
 
       if (chromium) {
         console.log('Stopping')
@@ -24,6 +25,7 @@ module.exports = {
 
       chromium.on('error', function(err) {
         console.error('spawn error', err)
+        errorSent = true
         callback(err)
       });
       
@@ -33,10 +35,10 @@ module.exports = {
       
       chromium.on('close', (code) => {
         console.log(`chromium process exited with code ${code}`);
-        (!res || !res.headersSent) && callback(null, 'open', { command, code })
-      });
+        !errorSent && callback(null, 'open', { command, code })
 
-      setTimeout(() => callback(null, 'open', { command, code: 'timeout' }), 1000)
+        setTimeout(() => callback(null, 'open', { command, code: 'timeout' }), 1000)
+      });
     } catch (err) {
       console.error('open error', err)
       callback(err)

@@ -4,6 +4,11 @@ var QRCode = require('qrcode')
 
 var hostname = os.hostname();
 var router = express.Router();
+
+if (!hostname.endsWith('.local')) {
+  hostname = hostname + '.local'
+}
+
 var url = 'http://'+hostname+':3000'
 
 router.get('/instructions', function(req, res, next) {

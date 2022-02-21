@@ -30,7 +30,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-open('http://localhost:'+port+'/instructions', null, params => {
+open('http://localhost:'+port+'/instructions', params => {
   console.log('initial open', params)
 })
 

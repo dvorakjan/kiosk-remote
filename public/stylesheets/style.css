@@ -47,7 +47,7 @@ input[type=text]:hover, input[type=text]:active {
   padding: 14px;
 }
 
-input[type=submit] {
+input[type=submit], a.button {
   height: 40px;
   padding: 5px 25px;
 

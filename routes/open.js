@@ -4,7 +4,9 @@ var { open } = require('../lib')
 
 router.post('/', function(req, res, next) {
   const url = req.body.url
-  open(url, params => res.render('open', res, params))
+  open(url, (err, params) => {
+    !res.headersSent && res.render(err ? 'error' : 'open', {error: err, ...params})
+  })
 });
 
 module.exports = router;
