@@ -40,7 +40,7 @@ function open(url, callback) {
     });
     
     chromium.on('close', (code) => {
-      console.log(`chromium process exited with code ${code}`);
+      console.log(`chromium process exited with code ${code}, err sent`, errorSent);
       if (!errorSent) {
         callback(null, 'open', { command, code })
         setTimeout(() => callback(null, 'open', { command, code: 'timeout' }), 1000)
